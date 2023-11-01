@@ -39,22 +39,68 @@ public class GamePanel extends JPanel implements Runnable{
     public void run() {
         init();
         final double GAME_HERTZ = 60.0;
-        final double TBU = 1000000000 / GAME_HERTZ;
-        final int MUBR = 5;
+        final double TBU = 1000000000 / GAME_HERTZ; //time be4 update
+        final int MUBR = 5; //most update before render
         double lastUpdateTime = System.nanoTime();
         double lastRenderTime;
         final double TARGET_FPS = 60.0;
-        final  double TTBR = 1000000000 / TARGET_FPS ;
+        final  double TTBR = 1000000000 / TARGET_FPS ; //total time be4 update
+        int frameCount = 0;
+        int lastSecondTime = (int) (lastUpdateTime/1000000000);
+        int oldFrameCount = 0;
         while (running) {
-            update();
+
+            double now = System.nanoTime();
+            int upDateCount = 0;
+            while (((now - lastUpdateTime) > TBU) && (upDateCount < MUBR))  {
+                update();
+                input();
+                lastUpdateTime += TBU;
+                upDateCount++;
+
+            }
+
+            if(now - lastUpdateTime > TBU) {
+                lastUpdateTime = now - TBU;
+            }
+
+            input();
+
             render();
             draw();
+            lastRenderTime = now;
+            frameCount++;
+
+            int thisSecond = (int) (lastUpdateTime / 1000000000);
+            if(thisSecond > lastSecondTime) {
+                if(frameCount != oldFrameCount) {
+                    System.out.println(thisSecond + "    " + frameCount);
+                    oldFrameCount = frameCount;
+                }
+                frameCount = 0;
+                lastSecondTime = thisSecond;
+            }
+
+            while(now - lastRenderTime < TTBR && now - lastUpdateTime < TBU) {
+                Thread.yield();
+
+                try{
+                    Thread.sleep(1);
+                } catch (Exception e) {
+                    System.out.println("Error: yieldinf thread");
+                }
+                now = System.nanoTime();
+            }
         }
     }
 
     private int x =0;
     public void update() {
         x++;
+    }
+
+    public void input () {
+
     }
     public  void render() {
         g.setColor( new Color(66, 131, 168));
