@@ -1,4 +1,7 @@
 package com.kuan.game;
+import com.kuan.game.states.GameStateManager;
+import com.kuan.game.util.KeyHandler;
+import com.kuan.game.util.MouseHandler;
 import org.ietf.jgss.GSSManager;
 
 import  javax.swing.JPanel;
@@ -13,6 +16,9 @@ public class GamePanel extends JPanel implements Runnable{
     private BufferedImage img;
     private Graphics2D g;
     private  boolean running= false;
+    private MouseHandler mouse;
+    private KeyHandler key;
+    private GameStateManager gsm;
     public GamePanel (int width, int height) {
         this.height = height;
         this.width = width;
@@ -35,6 +41,10 @@ public class GamePanel extends JPanel implements Runnable{
 
         img = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
         g = (Graphics2D) img.getGraphics();
+
+        mouse = new MouseHandler();
+        key = new KeyHandler(this); //vid 4
+        gsm = new GameStateManager();
     }
     public void run() {
         init();
@@ -54,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
             int upDateCount = 0;
             while (((now - lastUpdateTime) > TBU) && (upDateCount < MUBR))  {
                 update();
-                input();
+                input(mouse, key);
                 lastUpdateTime += TBU;
                 upDateCount++;
 
@@ -64,7 +74,7 @@ public class GamePanel extends JPanel implements Runnable{
                 lastUpdateTime = now - TBU;
             }
 
-            input();
+            input(mouse,key);
 
             render();
             draw();
@@ -96,15 +106,16 @@ public class GamePanel extends JPanel implements Runnable{
 
     private int x =0;
     public void update() {
-        x++;
+        gsm.update();
     }
 
-    public void input () {
-
+    public void input (MouseHandler mouse, KeyHandler key) {
+        gsm.input(mouse,key);
     }
     public  void render() {
         g.setColor( new Color(66, 131, 168));
         g.fillRect(0,0,width,height);
+        gsm.render(g);
     }
     public void draw() {
         Graphics g2 = (Graphics) this.getGraphics();
