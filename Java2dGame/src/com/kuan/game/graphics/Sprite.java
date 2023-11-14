@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Sprite {
-    private final BufferedImage SPRITESHEET = null;
+    private BufferedImage SPRITESHEET = null;
     private BufferedImage[][] spriteArray;
     private final int TILE_SIZE = 32;
     public int w;
@@ -110,9 +110,11 @@ public class Sprite {
         float y = pos.y;
         for (int i=0; i < word.length(); i++) {
             if(word.charAt(i) !=32)
-                g.drawImage(f.getFont(word.charAt(i)),(int) x,(int) y, width, height, null)
+                g.drawImage(f.getFont(word.charAt(i)),(int) x,(int) y, width, height, null);
+            x+= xOffset;
+            y+= yOffset;
+
         }
-        x+= xOffset;
-        y+= xOffset;
+
     }
 }
