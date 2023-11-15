@@ -31,7 +31,7 @@ public class Player extends Entity {
 
         if (down) {
             dy += acc;
-            if (dy < maxSpeed) {
+            if (dy > maxSpeed) {
                 dy = maxSpeed;
             }
         } else {
@@ -79,8 +79,8 @@ public class Player extends Entity {
     public void update() {
         super.update();
         move();
-        pos.x = dx;
-        pos.y = dy;
+        pos.x += dx;
+        pos.y += dy;
     }
 
     @Override
@@ -91,7 +91,7 @@ public class Player extends Entity {
     public void input(MouseHandler mouse, KeyHandler key) {
 
         if (mouse.getButton() ==1 ) {
-            System.out.println("Player: "+ pos.x + ", " + pos.x);
+            System.out.println("Player: "+ pos.x + ", " + pos.y);
         }
 
         if(key.up.down) {

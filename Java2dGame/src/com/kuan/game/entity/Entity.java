@@ -2,8 +2,8 @@ package com.kuan.game.entity;
 
 import com.kuan.game.graphics.Animation;
 import com.kuan.game.util.AABB;
-import com.kuan.game.util.KeyHandler;
-import com.kuan.game.util.MouseHandler;
+//import com.kuan.game.util.KeyHandler;
+//import com.kuan.game.util.MouseHandler;
 import com.kuan.game.util.Vector2f;
 import com.kuan.game.graphics.Sprite;
 
@@ -12,10 +12,10 @@ import java.awt.image.BufferedImage;
 
 
 public abstract class Entity {
-    private final int UP = 0;
-    private final int DOWN = 1;
-    private final int RIGHT = 2;
-    private final int LEFT = 3;
+    private final int UP = 3;
+    private final int DOWN = 2;
+    private final int RIGHT = 0;
+    private final int LEFT = 1;
     protected int currentAnimation;
 
     protected Animation ani;
@@ -31,9 +31,9 @@ public abstract class Entity {
     protected int attackDuration;
     protected float dx;
     protected float dy;
-    protected float maxSpeed;
-    protected float acc;
-    protected float deacc;
+    protected float maxSpeed = 3f;
+    protected float acc = 2.5f;
+    protected float deacc = 0.3f;
 
     protected AABB hitBounds;
     protected AABB bounds;
@@ -135,6 +135,6 @@ public abstract class Entity {
     }
 
     public abstract  void render(Graphics2D g);
-    public void input(KeyHandler key, MouseHandler mouse) {}
+//    public void input(KeyHandler key, MouseHandler mouse) {}
 
 }
