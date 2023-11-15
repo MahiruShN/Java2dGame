@@ -15,6 +15,9 @@ public class Animation {
         setFrames(frames);
 
     }
+    public Animation() {
+        timePlayed = 0;
+    }
 
     public void setFrames(BufferedImage[] frames) {
         this.frames = frames;
