@@ -86,7 +86,7 @@ public class Font {
         return FONTSHEET.getSubimage(x*w,y*h,w,h);
     }
     public BufferedImage getFont (char letter) {
-        int value = letter -65 ;
+        int value = letter;
         int x= value % wLetter;
         int y = value / wLetter;
         return  getLetter(x,y);

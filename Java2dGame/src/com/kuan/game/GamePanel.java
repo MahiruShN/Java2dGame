@@ -12,6 +12,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public static int width;
     public static int height;
+    public static int oldFrameCount;
     private  Thread thread;
     private BufferedImage img;
     private Graphics2D g;
@@ -57,7 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
         final  double TTBR = 1000000000 / TARGET_FPS ; //total time be4 update
         int frameCount = 0;
         int lastSecondTime = (int) (lastUpdateTime/1000000000);
-        int oldFrameCount = 0;
+        oldFrameCount = 0;
         while (running) {
 
             double now = System.nanoTime();
