@@ -45,6 +45,7 @@ public class TileManager {
             Document doc = builder.parse(new File(getClass().getClassLoader().getResource(path).toURI()));
 
             doc.getDocumentElement().normalize();
+
             NodeList list = doc.getElementsByTagName("tileset");
             Node node = list.item(0);
             Element eElement = (Element) node;
@@ -53,25 +54,21 @@ public class TileManager {
 //            imagePathTSX = eElement.getAttribute("source");
 //            imagePath = imagePathTSX.substring(0, imagePathTSX.length() - 4);
 
-            list = doc.getElementsByTagName("map");
-            node = list.item(0);
-            eElement = (Element) node;
+
 
             tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
             tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
+            tileColumns =  Integer.parseInt(eElement.getAttribute("columns"));
 
 //            tileWidth = Integer.parseInt(eElement.getAttribute("tilewidth"));
 //            tileHeight = Integer.parseInt(eElement.getAttribute("tileheight"));
 
             sprite = new Sprite("tile/" + imagePath + ".png", tileWidth, tileHeight);
 
-            tileCount = Integer.parseInt(eElement.getAttribute("tilecount"));
-            tileColumns = Integer.parseInt(eElement.getAttribute("columns"));
+            //tileCount = Integer.parseInt(eElement.getAttribute("tilecount"));
+
 //            tileColumns = sprite.getSpriteSheetWidth() / tileWidth;
 //            tileCount = tileColumns * (sprite.getSpriteSheetHeight() / tileHeight);
-
-
-
 
             list = doc.getElementsByTagName("layer");
             layers = list.getLength();
