@@ -79,6 +79,9 @@ public class Sprite {
         }
     }
 
+    public int getSpriteSheetWidth() { return SPRITESHEET.getWidth(); }
+    public int getSpriteSheetHeight() { return SPRITESHEET.getHeight(); }
+
     public BufferedImage getSpriteSheet() {
         return SPRITESHEET;
     }

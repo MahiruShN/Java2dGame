@@ -19,7 +19,7 @@ public class PlayState extends GameState {
     private TileManager tm;
     public PlayState(GameStateManager gsm) {
         super(gsm);
-        tm = new TileManager("tile/tilemap2.xml");
+        tm = new TileManager("tile/tilemap1.xml");
         font = new Font("font/font.png",10,10);
         player = new Player(new Sprite("entity/linkformatted.png"), new Vector2f(500,500),128);
     }
