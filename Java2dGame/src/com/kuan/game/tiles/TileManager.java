@@ -83,7 +83,10 @@ public class TileManager {
                 }
 
                 data[i] = eElement.getElementsByTagName("data").item(0).getTextContent();
-                System.out.println("-----------------\n" + data[i]);
+
+                if () {
+
+                }
             }
         } catch (Exception e) {
             System.out.println("ERROR: cant read tilemap(tile manager)");
