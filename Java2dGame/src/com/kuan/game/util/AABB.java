@@ -1,6 +1,7 @@
 package com.kuan.game.util;
 
 import com.kuan.game.entity.Entity;
+import com.kuan.game.tiles.TileMapObj;
 
 public class AABB {
 
@@ -58,6 +59,8 @@ public class AABB {
     public void setYOffset(float f) {
         yOffset = f;
     }
+    public float getXOffset() {return xOffset;};
+    public float getYOffset() {return yOffset;};
     public boolean collides (AABB bBox) {
         float ax = ((pos.getWorldVar().x + (xOffset)) + (w/2));
         float ay = ((pos.getWorldVar().y + (yOffset)) + (h/2));
@@ -86,6 +89,20 @@ public class AABB {
             return true;
         }
         return false;
+    }
+
+    public boolean collisionTile(float ax, float ay) {
+        for (int c = 0; c < 4; c++) {
+            int xt = (int) ( (pos.x +ax) + (c % 2) * w + xOffset) / 64;
+            int yt = (int) ( (pos.y +ay) + ((int) (c / 2)) * h + yOffset) / 64;
+
+            if (TileMapObj.tmo_blocks.containsKey(String.valueOf(xt) + "," + String.valueOf(yt))) {
+                return TileMapObj.tmo_blocks.get(String.valueOf(xt) + "," + String.valueOf(yt)).update(this);
+
+            }
+        }
+        return false;
+
     }
 
 }

@@ -27,10 +27,10 @@ public class TileMapObj extends TileMap {
         for (int i = 0; i <( width * height); i++) {
             int temp = Integer.parseInt(block[i].replaceAll("\\s+",""));
             if (temp != 0) {
-                if ((temp == 729) || (temp == 730) ||( temp == 7310)) {
-                    tempBlock = new HoleBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns )), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
+                if (temp == 172) {
+                    tempBlock = new HoleBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns) ), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
                 } else {
-                    tempBlock = new ObjBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns )), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
+                    tempBlock = new ObjBlock(sprite.getSprite((int) ((temp - 1) % tileColumns), (int) ((temp - 1) / tileColumns) ), new Vector2f((int) (i % width) * tileWidth, (int) (i / height) * tileHeight), tileWidth, tileHeight);
                 }
                 tmo_blocks.put (String.valueOf((int) (i % width)) + "," + String.valueOf((int) (i / height)), tempBlock);
             }
