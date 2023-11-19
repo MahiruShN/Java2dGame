@@ -84,8 +84,11 @@ public class TileManager {
 
                 data[i] = eElement.getElementsByTagName("data").item(0).getTextContent();
 
-                if () {
+                if (i >=1) {
+                    tm.add(new TileMapNorm(data[i],sprite, width, height, blockWidth, blockHeight, tileColumns));
 
+                } else  {
+                    tm.add(new TileMapObj(data[i],sprite, width, height, blockWidth, blockHeight, tileColumns));
                 }
             }
         } catch (Exception e) {
@@ -94,9 +97,11 @@ public class TileManager {
     }
 
     public void render(Graphics2D g) {
-
+        for (int i = 0; i < tm.size(); i++) {
+            tm.get(i).render(g);
+        }
     }
 
-    //TODO fix tile map using 1.0.1 tile editor
+
 
 }
